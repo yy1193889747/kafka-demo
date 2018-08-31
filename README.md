@@ -9,3 +9,6 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
      --refresh 10.seconds \
      --retain 2.days & nohup.out
 ```
+## 2. 监控平台 [zkui](https://github.com/DeemOpen/zkui) 搭建
+    nohup java -jar zkui-2.0-SNAPSHOT-jar-with-dependencies.jar &
+注：（jar包和config.cfg在同级目录，修改相关配置
