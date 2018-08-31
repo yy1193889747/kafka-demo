@@ -21,7 +21,10 @@ public class Producer {
 
         ProducerRecord<String, String> record = new ProducerRecord<>("test", "hello", "world");
         try {
-            producer.send(record).get();
+            while (true) {
+                producer.send(record);
+                Thread.sleep(1000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
