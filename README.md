@@ -11,5 +11,10 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
 ```
 ## 2. 监控平台 [zkui](https://github.com/DeemOpen/zkui) 搭建
     nohup java -jar zkui-2.0-SNAPSHOT-jar-with-dependencies.jar &
-注：(jar包和config.cfg在同级目录，修改相关配置。
+注：(jar包和config.cfg在同级目录，修改相关配置。)
+
+## 3. 监控平台 [kafka-web-console](https://github.com/claudemamo/kafka-web-console) 搭建
+    nohup ./kafka-web-console -Dhttp.port=9001 >/dev/null 2>&1 &
+注：([编译和打包教程](https://blog.csdn.net/hengyunabc/article/details/40431627))
+
 ## 3. 压缩算法 snappy
