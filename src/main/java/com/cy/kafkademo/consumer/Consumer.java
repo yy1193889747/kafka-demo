@@ -25,7 +25,8 @@ public class Consumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         // 订阅所有与test相关的主题  consumer.subscribe("test.*")
         consumer.subscribe(Collections.singletonList("test"));
-
+        // 获取topics
+        System.out.println("------"+consumer.listTopics());
 
         HashMap<String, Integer> map = new HashMap<>(1 << 8);
         try {

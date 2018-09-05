@@ -13,12 +13,11 @@ public class Producer {
     public static void main(String[] args) {
 
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "bill:9092,bill:9093,bill:9094");
+        properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-
         ProducerRecord<String, String> record = new ProducerRecord<>("test", "hello", "world");
         try {
             while (true) {
