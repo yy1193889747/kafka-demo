@@ -1,9 +1,9 @@
 package com.cy.kafkademo.consumer;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,13 +20,16 @@ public class Consumer {
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("group.id", "testss");
+        properties.put("group.id", "testssd");
         properties.put("auto.commit.interval.ms", "1000");
         properties.put("auto.offset.reset", "earliest");
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
-        // 订阅所有与test相关的主题  consumer.subscribe("test.*")
+        // 订阅所有与test相关的主题  consumer.subscribe("test.*") 自定分配分区
         consumer.subscribe(Collections.singletonList("test"));
+        consumer.poll(0);
+        // consumer.assign(Collections.singleton(new TopicPartition("test", 0)));
+        // consumer.seek(new TopicPartition("test", 0), 370);
         // 获取topics
         System.out.println("------"+consumer.listTopics());
 
@@ -42,7 +45,6 @@ public class Consumer {
                     }
                     map.put(record.value(), count);
 
-                    System.out.println(JSONObject.toJSONString(map));
                 }
             }
         } catch (Exception e) {

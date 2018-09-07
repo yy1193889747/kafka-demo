@@ -19,3 +19,6 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
 
 ## 4. 消费者
 * 不同群组消费同一个topic  `properties.put("auto.offset.reset", "earliest");`
+* 从指定偏移量开始获取数据 `consumer.seek(new TopicPartition("test", 0), 370);`
+    * subscribe订阅，则需先`consumer.poll(0)`，来自动分配分区
+    * assign订阅，直接指定分区`consumer.assign(Collections.singleton(new TopicPartition("test", 0)))`，（不会触发再均衡）
