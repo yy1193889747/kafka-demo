@@ -17,4 +17,4 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
     nohup ./kafka-web-console -Dhttp.port=9001 >/dev/null 2>&1 &
 注：([编译和打包教程](https://blog.csdn.net/hengyunabc/article/details/40431627))
 
-## 3. 压缩算法 snappy
+## 4. 不同群组消费同一个topic  `properties.put("auto.offset.reset", "earliest");`
