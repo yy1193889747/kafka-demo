@@ -17,8 +17,17 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
     nohup ./kafka-web-console -Dhttp.port=9001 >/dev/null 2>&1 &
 注：([编译和打包教程](https://blog.csdn.net/hengyunabc/article/details/40431627))
 
-## 4. 消费者
+## 4. 生产者
+* 查看数据`bin/kafka-run-class.sh kafka.tools.DumpLogSegments --files /home/bill/tool/kafka/log/test-0/00000000000000000000.log`
+
+## 5. 消费者
 * 不同群组消费同一个topic  `properties.put("auto.offset.reset", "earliest");`
-* 从指定偏移量开始获取数据 `consumer.seek(new TopicPartition("test", 0), 370);`
+* 从指定偏移量(分区)开始获取数据 `consumer.seek(new TopicPartition("test", 0), 370);`
     * subscribe订阅，则需先`consumer.poll(0)`，来自动分配分区
-    * assign订阅，直接指定分区`consumer.assign(Collections.singleton(new TopicPartition("test", 0)))`，（不会触发再均衡）
+    * assign订阅，直接指定分区`consumer.assign(Collections.singleton(new TopicPartition("test", 0)))`，（使用assign,不会触发再均衡）
+    
+## 6. 主题
+* 创建分区为8，副本为2的主题
+`bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic strong-topic --replication-factor 2 --partitions 8 --disable-rack-aware`
+* 查看主题
+`bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic strong-topic`

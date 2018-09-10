@@ -13,9 +13,10 @@ public class Producer {
     public static void main(String[] args) {
 
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "localhost:9092");
+        properties.put("bootstrap.servers", "bill:9092,bill:9093,bill:9094");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        // 指定压缩算法 none gzip snappy lz4
         properties.put("compression.type", "snappy");
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
