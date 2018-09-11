@@ -19,6 +19,7 @@ nohup java -cp KafkaOffsetMonitor-assembly-0.2.1.jar \
 
 ## 4. 生产者
 * 查看数据`bin/kafka-run-class.sh kafka.tools.DumpLogSegments --files /home/bill/tool/kafka/log/test-0/00000000000000000000.log`
+* 向指定分区发数据`new ProducerRecord<>("strong-topic",1,System.currentTimeMillis(),"hello","world")`（或者实现自己的分区策略）
 
 ## 5. 消费者
 * 不同群组消费同一个topic  `properties.put("auto.offset.reset", "earliest");`

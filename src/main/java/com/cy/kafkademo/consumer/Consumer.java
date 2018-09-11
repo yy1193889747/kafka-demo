@@ -20,22 +20,22 @@ public class Consumer {
         properties.put("bootstrap.servers", "bill:9092,bill:9093,bill:9094");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("group.id", "testsszd");
+        properties.put("group.id", "testgroup");
         properties.put("auto.commit.interval.ms", "1000");
         properties.put("auto.offset.reset", "earliest");
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         // 订阅所有与test相关的主题  consumer.subscribe("test.*") 自定分配分区
-        consumer.subscribe(Collections.singletonList("test"));
+        consumer.subscribe(Collections.singletonList("strong-topic"));
 
-        System.out.println(consumer.partitionsFor("test"));
+        System.out.println(consumer.partitionsFor("strong-topic"));
 
-        consumer.poll(0);
+        //consumer.poll(0);
 
         // consumer.assign(Collections.singleton(new TopicPartition("test", 0)));
-        consumer.seek(new TopicPartition("test", 0), 0);
+        //consumer.seek(new TopicPartition("strong-topic", 0), 0);
         // 获取topics
-        System.out.println("所有Topic列表" + consumer.listTopics());
+        System.out.println("所有Topic列表:" + consumer.listTopics());
 
         HashMap<String, Integer> map = new HashMap<>(1 << 8);
         try {
